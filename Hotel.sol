@@ -21,13 +21,15 @@ contract HotelRoom {
 
         modifier onlyWhileVacant {
             require(currentStatus = Statuses.Vacant, "Currently occupied");
+            _;
         }
 
         modifier priceCheck(uint _amount ) {
                      require(msg.value >=  _amount, "you need more ether. Not enough ether provided.");
+                     _;
         }
 
-        function book() payable onlyWhileVacant, priceCheck(2 ether) {
+        receive()  external payable onlyWhileVacant, priceCheck(2 ether) {
          
                 //pay owner to book hotel room
                 currentStatus = Statuses.Occupied;
