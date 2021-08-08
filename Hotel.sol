@@ -11,7 +11,7 @@ contract HotelRoom {
         Statuses currentStatus;
         
         //events
-        
+        event Occupy(address _occupant, uint _value);
 
 
         constructor() public{
@@ -32,6 +32,7 @@ contract HotelRoom {
                 //pay owner to book hotel room
                 currentStatus = Statuses.Occupied;
                 owner.transfer(msg.value);
+                emit Occupy(msg.sender, msg.value);
 
         }
 
